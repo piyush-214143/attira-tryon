@@ -20,3 +20,6 @@ yarn-error.log*
 
 # Task source material (kept locally, not part of the submission)
 task.pdf
+
+# Build artifact — regenerated on demand
+attira-tryon.zip
