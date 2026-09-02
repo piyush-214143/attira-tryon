@@ -10,8 +10,13 @@ styling note and returns a mock result image.
 | Mobile app | React Native 0.87 CLI, TypeScript, Redux Toolkit + RTK Query, redux-persist | [`mobile/`](mobile/) |
 | Backend | Node, Express 4, TypeScript, `@google/generative-ai` | [`backend/`](backend/) |
 
-> Screenshot of the running app: [`_figma/app-initial.png`](_figma/app-initial.png)
-> Reference Figma export: [`_figma/outfitdetail.png`](_figma/outfitdetail.png)
+### Screenshots (running on iOS simulator, real Gemini call)
+
+| Initial | Loading | Success | Error |
+| --- | --- | --- | --- |
+| ![initial](screenshots/01-initial.png) | ![loading](screenshots/02-loading.png) | ![success](screenshots/03-success.png) | ![error](screenshots/04-error.png) |
+
+Reference Figma export: [`_figma/outfitdetail.png`](_figma/outfitdetail.png)
 
 ---
 
@@ -43,8 +48,8 @@ Success `200`:
 ```json
 {
   "status": "completed",
-  "resultImageUrl": "http://localhost:4000/static/mock-result.jpg",
-  "styleNote": "A sharp monochrome power look..."
+  "resultImageUrl": "http://localhost:4000/static/mock-result.jpg?v=1788344468251",
+  "styleNote": "Sharp tailoring balances the oversized silhouette to create an effortlessly commanding look..."
 }
 ```
 
@@ -58,7 +63,8 @@ Failure — always non-2xx + JSON:
 | `500` | `INTERNAL_ERROR` | anything else |
 
 - `GEMINI_API_KEY` is read server-side only (`backend/.env`) and never sent to the client.
-- The result image is a bundled static asset served from `backend/public/` — no image generation, per the task's mock-result note.
+- The result image is a bundled static asset served from `backend/public/` — no image generation, per the task's mock-result note. A `?v=<timestamp>` cache-buster is appended so a repeated try-on always re-renders.
+- Model is configurable via `GEMINI_MODEL` (default `gemini-3.6-flash`).
 - `GET /health` → `{ "status": "ok", "geminiConfigured": true|false }`
 
 ### Run

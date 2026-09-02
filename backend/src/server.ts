@@ -46,7 +46,9 @@ app.post('/api/try-on', async (req: Request, res: Response, next: NextFunction) 
 
     return res.json({
       status: 'completed',
-      resultImageUrl: `${env.PUBLIC_BASE_URL}${MOCK_RESULT_PATH}`,
+      // Cache-busting query so the client always renders the freshly generated
+      // result rather than a cached image for a repeated try-on.
+      resultImageUrl: `${env.PUBLIC_BASE_URL}${MOCK_RESULT_PATH}?v=${Date.now()}`,
       styleNote,
     });
   } catch (err) {

@@ -5,7 +5,7 @@ dotenv.config();
 export const env = {
   PORT: parseInt(process.env.PORT ?? '4000', 10),
   GEMINI_API_KEY: process.env.GEMINI_API_KEY ?? '',
-  GEMINI_MODEL: process.env.GEMINI_MODEL ?? 'gemini-2.0-flash',
+  GEMINI_MODEL: process.env.GEMINI_MODEL ?? 'gemini-3.6-flash',
   /**
    * Public base URL the mobile client can reach this server on. Used to build
    * the absolute `resultImageUrl` that points at the bundled mock asset.
